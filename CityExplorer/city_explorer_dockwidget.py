@@ -3,7 +3,7 @@
 /***************************************************************************
  CityExplorerDockWidget
                                  A QGIS plugin
- QGIS plugin to visualise IUM Baseline measures 
+ QGIS plugin to visualise IUM Baseline measures
                              -------------------
         begin                : 2019-11-14
         git sha              : $Format:%H$
@@ -22,6 +22,7 @@
 """
 
 import os
+import log
 
 from PyQt4 import QtGui, uic
 from PyQt4.QtCore import pyqtSignal
@@ -47,4 +48,3 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
-
