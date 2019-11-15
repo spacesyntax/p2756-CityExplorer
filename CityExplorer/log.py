@@ -2,26 +2,25 @@
 # TODO - change
 # include 3, 4 together
 
-landuses = { 'overall':[],
-            'social opportunities': ['unplanned interaction', 'bakery', 'super market', 'cafe', 'restaurant', 'shopping mall', 'convenience store', 'goods store',
-                                     'library', 'cultural centre', 'gallery', 'museum', 'cinema/theatre', 'concert hall', 'social', 'place of worship',
-                                     'community sports club', 'sports general', 'sports centre', 'gym', 'sports club', 'park'],
-            'physical activity': ['walkability', 'community sports club', 'sports general', 'sports centre', 'gym', 'sports club', 'park'],
-            'transport': [ 'bus', 'rail', 'metro'],
-            'healthcare facilities': ['hospital', 'mental health centre', 'emergency', 'special care', 'rehabilitation centre','dentist', 'hearing centre', 'general practitioner' ]
+kpi = { 'overall':[],
+            'liveability': ['vibrancy', 'all schools', '- nurseries', '- primary and secondary schools', '- higher education', 'parks', 'cultural facilities'],
+            'sustainabilty': ['population coverage', 'energy consumption?'],
+            'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport'. 'car dependence', 'walkability'  ],
+
         }
 
 ## colour ranges
-colour_scales = {'social opportunities': ["#D3D3D3", "#ffffcc", "#c1e7bc", "#81ceba", "#41b6c4", "#3391bc", "#2966ac", "#253494"],
-                'physical activity':["#D3D3D3", "#ffffcc", "#d7efaa", "#a9dc8e", "#78c679", "#48af60","#208f4a", "#006837"],
-                'transport': ["#D3D3D3", "#f1eef6", "#e0c8e2",  "#da9acb",  "#df65b0", "#de348a", "#c61266", "#980043"],
-                'healthcare facilities': ["#D3D3D3", "#ffffd4", "#ffe6a5", "#fec46c", "#fe9929", "#e67217","#c4500a", "#993404"],
-                'ssx':["#0000ff", "#00ffff", "#00ff50", "#ffff00", "#ffa000","#ff0000"]}
+colour_scales = {'overall': ["#fafafa", "#bcbcbc", "#7f7f7f","#424242", "#050505"],
+                 'liveability': ["#ffffff", "#ecbfbf", "#d98080", "#c64040", "#b30000"],
+                 'sustainabilty': ["#f7fcf5", "#caeac3", "#7bc87c", "#2a924a", "#00441b"],
+                 'health': ["#f7fbff", "#c8ddf0", "#73b3d8", "#2879b9", "#2879b9", "#08306b"]}
 
 ## sytem of column names
 
 ## tier 1 - index_name (e.g. overall, livability, ...) + '_score'
 ## tier 2 -  _10_walk
+tier1 = {'final_score', 'liveability_score','sustain_sc', 'health_score'}
+
 tier2 = {
 'liveability' : ['edu' , 'social', 'act_green', 'mscale_length'],
 'sustainability': ['pop_score', 'energy_mean_total'],
