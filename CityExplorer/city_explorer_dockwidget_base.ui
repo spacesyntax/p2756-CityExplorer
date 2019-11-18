@@ -26,7 +26,7 @@
          </sizepolicy>
         </property>
         <property name="title">
-         <string>Scores and indicators</string>
+         <string/>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
@@ -38,9 +38,9 @@
             </sizepolicy>
            </property>
            <property name="title">
-            <string/>
+            <string>City Performance Scores and Key Performance Indicators</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_7">
+           <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
              <layout class="QFormLayout" name="formLayout">
               <property name="fieldGrowthPolicy">
@@ -54,7 +54,11 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QComboBox" name="cps_combo"/>
+               <widget class="QComboBox" name="cps_combo">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
               </item>
               <item row="4" column="0">
                <widget class="QLabel" name="kpi_label">
@@ -67,6 +71,16 @@
                <widget class="QComboBox" name="kpi_combo"/>
               </item>
              </layout>
+            </item>
+            <item>
+             <widget class="QGraphicsView" name="graphicsView">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -82,7 +96,7 @@
            <property name="title">
             <string>Districts</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
              <layout class="QVBoxLayout" name="verticalLayout">
               <item>
@@ -91,8 +105,6 @@
              </layout>
             </item>
            </layout>
-           <zorder>listView</zorder>
-           <zorder>verticalLayoutWidget</zorder>
           </widget>
          </item>
          <item>
@@ -147,7 +159,6 @@
           </widget>
          </item>
         </layout>
-        <zorder>districts_groupBox</zorder>
         <zorder>districts_groupBox</zorder>
         <zorder>graphViewer_groupBox</zorder>
         <zorder>groupBox_4</zorder>
