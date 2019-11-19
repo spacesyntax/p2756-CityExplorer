@@ -3,10 +3,9 @@
 # include 3, 4 together
 
 kpi = { 'overall':[],
-            'liveability': ['vibrancy', 'all schools', '- nurseries', '- primary and secondary schools', '- higher education', 'parks', 'cultural facilities'],
+            'liveability': ['vibrancy', 'schools', '- nurseries', '- primary and secondary schools', '- higher education', 'parks', 'cultural facilities'],
             'sustainabilty': ['population coverage', 'energy consumption?'],
-            'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport'. 'car dependence', 'walkability'  ],
-
+            'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport', 'car dependence', 'walkability'  ]
         }
 
 ## colour ranges
@@ -19,7 +18,7 @@ colour_scales = {'overall': ["#fafafa", "#bcbcbc", "#7f7f7f","#424242", "#050505
 
 ## tier 1 - index_name (e.g. overall, livability, ...) + '_score'
 ## tier 2 -  _10_walk
-tier1 = {'final_score', 'liveability_score','sustain_sc', 'health_score'}
+tier1 = ['final_score', 'liveability_score','sustain_sc', 'health_score']
 
 tier2 = {
 'liveability' : ['edu' , 'social', 'act_green', 'mscale_length'],
@@ -32,3 +31,22 @@ tier3 = {
 'hcare': ['hcare_primary', 'hcare_secondary'],
 'car_depend': ['jobs']
 }
+
+# TODO: excel table (old column name - new column name)
+# TODO: copy of the ex IUM - change the columns names
+#       ALTER TABLE .... RENAME COLUMN x TO y;
+
+
+# TODO: create a function to get the column name
+# def get_column(user_input, tier):
+#   if tier == 1:
+#       return user_input + '_score'
+
+
+# TODO: populate drop downs
+
+# TODO: create main visualisation function (see CityZen explorer line 298 in cityzen_explorer_dockwidget.py)
+# def update_visualisation_map():
+#   # 1. get user input
+#   # 2. get colours
+# ...
