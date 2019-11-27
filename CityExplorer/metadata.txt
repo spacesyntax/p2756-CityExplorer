@@ -11,7 +11,7 @@ name=Nur-Sultan 2030 Masterplan Explorer
 qgisMinimumVersion=2.0
 description=QGIS plugin to visualise IUM Baseline measures 
 version=0.1
-author=Ioanna Kolovou
+author=Ioanna Kolovou, Abhimanyu Acharya
 email=i.kolovou@spacesyntax.com
 
 about=Provide a brief description of the plugin and its purpose.

@@ -22,7 +22,7 @@
 """
 
 import os
-import log
+from log import *
 
 from PyQt4 import QtGui, uic
 from PyQt4.QtCore import pyqtSignal
@@ -48,3 +48,8 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
+
+    def updatecpscombo(self):
+            self.cpscombo.clear()
+            kpi_list = [kpi.keys()]
+            self.cpscombo.addItems(kpi_list)

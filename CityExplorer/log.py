@@ -5,7 +5,7 @@
 kpi = { 'overall':[],
             'liveability': ['vibrancy', 'all schools', '- nurseries', '- primary and secondary schools', '- higher education', 'parks', 'cultural facilities'],
             'sustainabilty': ['population coverage', 'energy consumption?'],
-            'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport'. 'car dependence', 'walkability'  ],
+            'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport', 'car dependence', 'walkability'  ],
 
         }
 
