@@ -8,8 +8,6 @@ kpi = { 'overall':[],
 
             'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport', 'car dependence', 'walkability'  ],
 
-
-            'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport', 'car dependence', 'walkability'  ]
         }
 
 ## colour ranges
