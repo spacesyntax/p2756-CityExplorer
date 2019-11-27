@@ -5,12 +5,11 @@
 kpi = { 'overall':[],
             'liveability': ['vibrancy', 'schools', '- nurseries', '- primary and secondary schools', '- higher education', 'parks', 'cultural facilities'],
             'sustainabilty': ['population coverage', 'energy consumption?'],
-<<<<<<< HEAD
+
             'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport', 'car dependence', 'walkability'  ],
 
-=======
+
             'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport', 'car dependence', 'walkability'  ]
->>>>>>> cec471e6db30cad356219908a8a95dcce6eda935
         }
 
 ## colour ranges
