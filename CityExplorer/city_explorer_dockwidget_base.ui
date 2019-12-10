@@ -6,9 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>984</width>
-    <height>1381</height>
+    <width>393</width>
+    <height>757</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1051</width>
+    <height>1153</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Nur-Sultan 2030 Masterplan Explorer</string>
@@ -16,302 +34,247 @@
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QGroupBox" name="scores_groupBox">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
       </property>
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="QGroupBox" name="groupBox_4">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title">
-          <string>Key Performance Indicators</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <layout class="QGridLayout" name="gridLayout_2">
-            <item row="1" column="1">
-             <widget class="QPushButton" name="pushButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>info icon.png</normaloff>info icon.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QPushButton" name="pushButton_2">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>info icon.png</normaloff>info icon.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="7" column="1">
-             <widget class="QPushButton" name="pushButton_3">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>info icon.png</normaloff>info icon.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="0">
-             <widget class="QComboBox" name="comboBox"/>
-            </item>
-            <item row="5" column="0">
-             <spacer name="verticalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="checkBox">
-              <property name="text">
-               <string>City</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="checkBox_2">
-              <property name="text">
-               <string>Buildings</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QCheckBox" name="checkBox_3">
-              <property name="text">
-               <string>Streets</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QComboBox" name="kpicombo"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QComboBox" name="cpscombo">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string/>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout_5">
-            <item row="0" column="1">
-             <widget class="QPushButton" name="pushButton_4">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>info icon.png</normaloff>info icon.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="checkBox_5">
-              <property name="text">
-               <string>Show Vacant Plots</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="districts_groupBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="title">
-          <string>Sectors</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QListView" name="districtslistView"/>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="graphViewer_groupBox">
-         <property name="title">
-          <string>Graph viewer</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_2">
-            <item>
-             <widget class="QGraphicsView" name="graphviewregraphicsView"/>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="save_groupBox">
-            <property name="title">
-             <string>Save and Export</string>
-            </property>
-            <layout class="QFormLayout" name="formLayout_4">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-             </property>
-             <item row="0" column="0">
-              <widget class="QPushButton" name="save_pushButton">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Export graph</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QPushButton" name="export_pushButton">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Export csv</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="title">
-             <string/>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_3">
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Space Syntax Limited © 2019</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label">
-               <property name="text">
-                <string>The plugin has been developed by Space Syntax Limied for Astanagenplan as a part of the Nur-Sultan 2030 Concept Masterplan project - Strategy phase. </string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <spacer name="verticalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-      <zorder>districts_groupBox</zorder>
-      <zorder>graphViewer_groupBox</zorder>
-      <zorder>groupBox_4</zorder>
-      <zorder>groupBox_2</zorder>
-     </widget>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Key performance indicators</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>City</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QComboBox" name="cpscombo">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>10</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>info icon.png</normaloff>info icon.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="text">
+         <string>Buildings</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QComboBox" name="kpicombo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>10</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>info icon.png</normaloff>info icon.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="checkBox_3">
+        <property name="text">
+         <string>Streets</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QComboBox" name="comboBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>10</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>info icon.png</normaloff>info icon.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="8" column="0">
+       <widget class="QCheckBox" name="checkBox_5">
+        <property name="text">
+         <string>Show Vacant Plots</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>info icon.png</normaloff>info icon.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QListView" name="districtslistView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="11" column="0">
+       <widget class="QGraphicsView" name="graphviewregraphicsView">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
