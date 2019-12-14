@@ -2,10 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
+# import project specifi settings
+
 from log import *
 
 # https://stackoverflow.com/questions/42886076/matplotlib-radar-chart-axis-labels
-
 
 def drawHistogram(factor, districts):
 

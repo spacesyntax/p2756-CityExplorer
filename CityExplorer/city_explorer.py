@@ -73,6 +73,8 @@ class CityExplorer:
         self.pluginIsActive = False
         self.dockwidget = None
 
+        self.iface = iface
+
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -208,6 +210,32 @@ class CityExplorer:
 
     #--------------------------------------------------------------------------
 
+
+    def giveMessage(self, message, level):
+        # Gives warning according to message
+        self.iface.messageBar().pushMessage("City Explorer: ", "%s" % (message), level, duration=5)
+        print 'message'
+        return
+
+
+    def updateVisuals(self, cps, kpi, mode, street):
+        layers = self.dockwidget.layers
+        for index, layer in dict(zip([cps, kpi + mode, street], layers)):
+            if index:
+                pass
+                # update maps
+                #apply_symbology
+                applySymbologyFixedDivisions(self.layer, column, factor)
+                self.layer.triggerRepaint()
+
+                # update legend
+
+                # update zoom only when specific districts are selected
+
+                 # update charts
+
+        return
+
     def run(self):
         """Run method that loads and starts the plugin"""
 
@@ -221,10 +249,17 @@ class CityExplorer:
             #    removed on close (see self.onClosePlugin method)
             if self.dockwidget == None:
                 # Create the dockwidget (after translation) and keep reference
-                self.dockwidget = CityExplorerDockWidget()
+                self.dockwidget = CityExplorerDockWidget(['sectors', 'buildings', 'spm_ex_seg_mm'])
 
             # connect to provide cleanup on closing of dockwidget
             self.dockwidget.closingPlugin.connect(self.onClosePlugin)
+
+            self.dockwidget.warning.connect(self.giveMessage)
+
+            self.dockwidget.selectionChanged.connect(self.updateVisuals)
+
+            # TODO: activate and add vacant plots, transformability
+            self.dockwidget.layerCheck()
 
             # show the dockwidget
             # TODO: fix to allow choice of dock location

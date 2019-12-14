@@ -2,12 +2,11 @@
 # TODO - change
 # include 3, 4 together
 
-kpi = { 'overall':[],
-            'liveability': ['vibrancy', 'schools', '- nurseries', '- primary and secondary schools', '- higher education', 'parks', 'cultural facilities'],
-            'sustainabilty': ['population coverage', 'energy consumption?'],
-
-            'health': [ 'sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport', 'car dependence', 'walkability'  ],
-
+kpis = { 'overall':[],
+        'liveability': ['vibrancy', 'schools', '- nurseries', '- primary and secondary schools', '- higher education', 'parks', 'cultural facilities'],
+        #TODO add sustainability
+        # 'sustainability': ['population coverage', 'energy consumption?'],
+        'health': ['sport facilties','all healthcare', '- primary healthcare', '- secondary healthcare', 'public transport', 'car dependence', 'walkability'  ]
         }
 
 ## colour ranges
@@ -24,8 +23,10 @@ tier1 = ['final_score', 'liveability_score','sustain_sc', 'health_score']
 
 tier2 = {
 'liveability' : ['edu' , 'social', 'act_green', 'mscale_length'],
-'sustainability': ['pop_score', 'energy_mean_total'],
-'health': ['hcare', 'phys', 'pt_stops', 'mixeduse', 'car_depend']
+# TODO add sustainability
+# 'sustainability': ['pop_score', 'energy_mean_total'],
+'health': ['hcare', 'phys', 'pt_stops', 'mixeduse', 'car_depend'],
+'overall': ['edu' , 'social', 'act_green', 'mscale_length', 'pop_score', 'energy_mean_total', 'hcare', 'phys', 'pt_stops', 'mixeduse', 'car_depend']
 }
 
 tier3 = {
@@ -33,6 +34,29 @@ tier3 = {
 'hcare': ['hcare_primary', 'hcare_secondary'],
 'car_depend': ['jobs']
 }
+
+default_modes = [ '10min walk', '15min public transport', '15min car']
+
+modes = {
+    'edu': default_modes ,
+        'edu_nursery': default_modes,
+        'edu_secondary': default_modes,
+        'edu_higher': default_modes,
+    'social': default_modes,
+    'act_green': ['10min walk', '15min public transport'],
+    'mscale_length': ['all modes'],
+    # TODO add sustainability
+    'hcare' : default_modes,
+        'hcare_primary': default_modes,
+        'hcare_secondary': default_modes,
+    'phys': default_modes,
+    'pt_stops': default_modes,
+    'mixeduse': ['10min walk'],
+    'car_depend': ['car:public transport'],
+        'jobs': ['30min car', '30min public transport']
+}
+streets = ['multi-scale', 'NACh 2km', 'NACh 10km', 'NAIn 2km', 'NAIn 10km', 'count_id_resi']
+# ms, nach, in, count_id_resi
 
 # TODO: excel table (old column name - new column name)
 # TODO: copy of the ex IUM - change the columns names
