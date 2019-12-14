@@ -8,33 +8,34 @@ from log import *
 
 # https://stackoverflow.com/questions/42886076/matplotlib-radar-chart-axis-labels
 
-def drawHistogram(factor, districts):
+def drawHistogram(layer, field, districts):
 
-    # input
-    # districts
-    summary_layer = getLayerByName()
-    column = None
-    colour_scale = colour_scales[factor]
+    # TODO change dynamically
 
+    colour_scale = colour_scales[field]
     ranges = {'-1.00-0': '0', '0-0.2': '0-0.2', '0.2-0.4': '0.2-0.4', '0.4-0.6': '0.4-0.6', '0.6-0.8': '0.6-0.8', '0.8-1': '0.8-1'}
-    data = map(lambda f: (ranges[f['ranges']], f[column]) if f[column] else (ranges[f['ranges']], 0), summary_layer.getFeatures())
+
+    # TODO add filter based on districts
+
+    data = map(lambda f: (ranges[f['ranges']], f[field]) if f[field] else (ranges[f['ranges']], 0), layer.getFeatures())
     data_dict = dict(data)
 
     fig, ax = plt.subplots()
-    ind = np.arange(8)
+    ind = np.arange(6)
 
     # show the figure, but do not block
     # plt.show(block=False)
 
-    p0, p1, p25, p510, p1020, p2050, p50100, p100 = plt.bar(ind, [0, 0, 0, 0, 0, 0, 0, 0], align='center')
-    p = [p0, p1, p25, p510, p1020, p2050, p50100, p100]
-    colour_scale = colour_scales[factor]
+    p0, p1, p25, p510, p1020, p2050 = plt.bar(ind, [0, 0, 0, 0, 0, 0], align='center')
+    p = [p0, p1, p25, p510, p1020, p2050]
 
     for idx, i in enumerate(p):
         i.set_facecolor(colour_scale[idx])
 
     ax.set_xticks(ind)
-    ax.set_xticklabels(['0', '1', '2-5', '5-10', '10-20', '20-50', '50-100', '>100'])
+    # TODO setup ranges dynamically & max
+
+    ax.set_xticklabels(ranges)
     ax.set_ylim([0, 100])
     ax.set_ylabel('% buildings')
     ax.set_xlabel('number of land uses')

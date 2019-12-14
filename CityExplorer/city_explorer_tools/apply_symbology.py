@@ -21,27 +21,13 @@ def makeSymbologyForRange(layer, min, max, title, color):
 
 
 from ..log import colour_scales, ranges, labels
-ranges = [
-    [0,0],
-    [0, 0.2],
-    [0.2, 0.4],
-    [0.4, 0.6],
-    [0.6, 0.8],
-    [0.8, 1]
-]
-labels = ['0', '0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1']
 
 def applySymbologyFixedDivisions(layer, field):
     rangeList = []
-    for i, range  in enumerate(ranges[field]):
-        rangeList.append(makeSymbologyForRange(layer, range[0], ranges[1], '0', QColor("#0000ff")))
-
-    rangeList.append(makeSymbologyForRange(layer, 0, 0.2, '0-0.2', QColor("#00ffff")))
-    rangeList.append(makeSymbologyForRange(layer, 0.2, 0.4, '0.2-0.4', QColor("#00ff50")))
-    rangeList.append(makeSymbologyForRange(layer, 0.4, 0.6, '0.4-0.6', QColor("#ffff00")))
-    rangeList.append(makeSymbologyForRange(layer, 0.6, 0.8, '0.6-0.8', QColor("#ffa000")))
-    rangeList.append(makeSymbologyForRange(layer, 0.8, 1, '0.8-1', QColor("#ff0000")))
-
+    #TODO make dynamic
+    colors = colour_scales['overall']
+    for i, range  in enumerate(ranges):
+        rangeList.append(makeSymbologyForRange(layer, range[0], range[1], labels[i], QColor(colors[i])))
     renderer = QgsGraduatedSymbolRendererV2(field, rangeList)
     for i in renderer.symbols():
         i.symbolLayer(0).setOutlineColor(QColor("#ffffff"))

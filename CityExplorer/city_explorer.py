@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
-from PyQt4.QtGui import QAction, QIcon
+from PyQt4.QtGui import QAction, QIcon, QPixmap
 # Initialize Qt resources from file resources.py
 import resources
 
@@ -29,6 +29,8 @@ import resources
 from city_explorer_dockwidget import CityExplorerDockWidget
 import os.path
 
+from city_explorer_tools.apply_symbology import *
+from city_explorer_tools.draw_histogram import *
 
 class CityExplorer:
     """QGIS Plugin Implementation."""
@@ -219,20 +221,24 @@ class CityExplorer:
 
 
     def updateVisuals(self, cps, kpi, mode, street):
-        layers = self.dockwidget.layers
-        for index, layer in dict(zip([cps, kpi + mode, street], layers)):
-            if index:
-                pass
-                # update maps
-                #apply_symbology
-                applySymbologyFixedDivisions(self.layer, column, factor)
-                self.layer.triggerRepaint()
+        #for index, layer in dict(zip([cps, kpi + mode, street], layers)):
+            #if index:
+                #
+        # update maps
+        #apply_symbology
+        applySymbologyFixedDivisions(self.dockwidget.districts, 'liveability_score')
+        self.dockwidget.districts.triggerRepaint()
 
-                # update legend
 
-                # update zoom only when specific districts are selected
+        # update legend
 
-                 # update charts
+        # update zoom only when specific districts are selected
+
+         # update charts
+
+        chart = QPixmap(drawHistogram(self.dockwidget.districts,'liveability_score'))
+        chart = chart.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
+        self.dockwidget.chartView.setPixmap(chart)
 
         return
 
