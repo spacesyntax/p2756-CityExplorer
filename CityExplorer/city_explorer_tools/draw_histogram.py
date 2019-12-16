@@ -4,21 +4,22 @@ import os
 
 # import project specifi settings
 
-from log import *
+from ..log import *
 
 # https://stackoverflow.com/questions/42886076/matplotlib-radar-chart-axis-labels
 
-def drawHistogram(layer, field, districts):
+def drawHistogram(layer, field ): #TODO districts
 
-    # TODO change dynamically
+    # TODO change dynamically based on field
+    # colors, chart_legends, map_legends
 
     colour_scale = colour_scales[field]
     ranges = {'-1.00-0': '0', '0-0.2': '0-0.2', '0.2-0.4': '0.2-0.4', '0.4-0.6': '0.4-0.6', '0.6-0.8': '0.6-0.8', '0.8-1': '0.8-1'}
 
     # TODO add filter based on districts
 
-    data = map(lambda f: (ranges[f['ranges']], f[field]) if f[field] else (ranges[f['ranges']], 0), layer.getFeatures())
-    data_dict = dict(data)
+    #data = map(lambda f: (ranges[f['ranges']], f[field]) if f[field] else (ranges[f['ranges']], 0), layer.getFeatures())
+    #data_dict = dict(data)
 
     fig, ax = plt.subplots()
     ind = np.arange(6)
@@ -35,7 +36,7 @@ def drawHistogram(layer, field, districts):
     ax.set_xticks(ind)
     # TODO setup ranges dynamically & max
 
-    ax.set_xticklabels(ranges)
+    ax.set_xticklabels( ['a', 'b', 'a', 'b', 'a', 'b']) # ranges
     ax.set_ylim([0, 100])
     ax.set_ylabel('% buildings')
     ax.set_xlabel('number of land uses')
@@ -54,9 +55,9 @@ def drawHistogram(layer, field, districts):
         tick.set_color('gray')
 
     for i, k in zip(p, ['0', '1', '2-5', '5-10', '10-20', '20-50', '50-100', '>100']):
-        i.set_height(data_dict[k])
+        i.set_height(50)#data_dict[k])
 
-    output_path = os.path.dirname(__file__) + '/charts/foo.png'
+    output_path = os.path.dirname(__file__) + '/foo.png'
     plt.savefig(output_path)
 
     return output_path

@@ -76,6 +76,7 @@ class CityExplorer:
         self.dockwidget = None
 
         self.iface = iface
+        self.legend = None
 
 
     # noinspection PyMethodMayBeStatic
@@ -188,6 +189,18 @@ class CityExplorer:
         # disconnects
         self.dockwidget.closingPlugin.disconnect(self.onClosePlugin)
 
+        self.dockwidget.warning.disconnect(self.giveMessage)
+        self.dockwidget.selectionChanged.disconnect(self.updateVisuals)
+        self.legend.itemAdded.disconnect(self.dockwidget.updateLayers)
+        self.legend.itemRemoved.disconnect(self.dockwidget.updateLayers)
+
+        # disconnects from dockwidget
+        self.dockwidget.cityCheckBox.stateChanged.disconnect(self.dockwidget.disable_cpscombo)
+        self.dockwidget.buildCheckBox.stateChanged.disconnect(self.dockwidget.disable_kpicombo)
+        self.dockwidget.strCheckBox.stateChanged.disconnect(self.dockwidget.disable_strcombo)
+        self.dockwidget.cpscombo.currentIndexChanged.disconnect(self.dockwidget.updatekpicombo)
+        self.dockwidget.kpicombo.currentIndexChanged.disconnect(self.dockwidget.updatemodecombo)
+
         # remove this statement if dockwidget is to remain
         # for reuse if plugin is reopened
         # Commented next statement since it causes QGIS crashe
@@ -229,15 +242,14 @@ class CityExplorer:
         applySymbologyFixedDivisions(self.dockwidget.districts, 'liveability_score')
         self.dockwidget.districts.triggerRepaint()
 
-
         # update legend
 
         # update zoom only when specific districts are selected
 
-         # update charts
+        # update charts
 
-        chart = QPixmap(drawHistogram(self.dockwidget.districts,'liveability_score'))
-        chart = chart.scaled(300, 300, Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
+        chart = QPixmap(drawHistogram(self.dockwidget.districts,'liveability'))
+        chart = chart.scaled(300, 300, aspectRatioMode=Qt.IgnoreAspectRatio, transformMode=Qt.SmoothTransformation)
         self.dockwidget.chartView.setPixmap(chart)
 
         return
@@ -257,18 +269,21 @@ class CityExplorer:
                 # Create the dockwidget (after translation) and keep reference
                 self.dockwidget = CityExplorerDockWidget(['sectors', 'buildings', 'spm_ex_seg_mm'])
 
+            self.legend = self.iface.legendInterface()
+
             # connect to provide cleanup on closing of dockwidget
             self.dockwidget.closingPlugin.connect(self.onClosePlugin)
 
+            # connects
             self.dockwidget.warning.connect(self.giveMessage)
-
+            self.legend.itemAdded.connect(self.dockwidget.updateLayers)
+            self.legend.itemRemoved.connect(self.dockwidget.updateLayers)
             self.dockwidget.selectionChanged.connect(self.updateVisuals)
 
-            # TODO: activate and add vacant plots, transformability
+            # check layers on loading the widget
             self.dockwidget.layerCheck()
 
             # show the dockwidget
-            # TODO: fix to allow choice of dock location
             self.iface.addDockWidget(Qt.RightDockWidgetArea, self.dockwidget)
             self.dockwidget.show()
 

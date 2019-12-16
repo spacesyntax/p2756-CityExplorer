@@ -54,46 +54,52 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.buildings = getLayerByName(self.layers[1])
         self.streets = getLayerByName(self.layers[2])
 
+        # setup info icons on pushbuttons
         info_icon = QtGui.QPixmap(os.path.dirname(__file__) + "/raster/info_icon.png")
         self.cityInfo.setIcon(QtGui.QIcon(info_icon))
         self.cityInfo.setIconSize(QSize(18, 18))
-        self.cityInfo.setFixedHeight(32)
-        self.cityInfo.setFixedWidth(77)
 
         self.buildInfo.setIcon(QtGui.QIcon(info_icon))
         self.buildInfo.setIconSize(QSize(18, 18))
-        self.buildInfo.setFixedHeight(32)
-        self.buildInfo.setFixedWidth(77)
 
         self.strInfo.setIcon(QtGui.QIcon(info_icon))
         self.strInfo.setIconSize(QSize(18, 18))
-        self.strInfo.setFixedHeight(32)
-        self.strInfo.setFixedWidth(77)
 
         self.vacantInfo.setIcon(QtGui.QIcon(info_icon))
         self.vacantInfo.setIconSize(QSize(18, 18))
-        self.vacantInfo.setFixedHeight(32)
-        self.vacantInfo.setFixedWidth(77)
+
+        self.transformInfo.setIcon(QtGui.QIcon(info_icon))
+        self.transformInfo.setIconSize(QSize(18, 18))
 
         logo = QtGui.QPixmap(os.path.dirname(__file__) + '/raster/Space_Syntax_logo.png')
         logo = logo.scaled(100, 15, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.logoLabel.setPixmap(logo)
 
         self.settings = []
+
+        # add items to combos
         self.updatecpscombo()
         self.updatekpicombo()
         self.updatemodecombo()
-        self.cpscombo.currentIndexChanged.connect(self.updatekpicombo)
-        self.kpicombo.currentIndexChanged.connect(self.updatemodecombo)
+        self.strcombo.addItems(streets)
+
+        # enable only city index
         self.cityCheckBox.setChecked(True)
         self.buildCheckBox.setChecked(False)
         self.strCheckBox.setChecked(False)
-        self.disable_kpicombo()
-        self.disable_strcombo()
+
+        # signals to disable/enable layers
         self.cityCheckBox.stateChanged.connect(self.disable_cpscombo)
         self.buildCheckBox.stateChanged.connect(self.disable_kpicombo)
         self.strCheckBox.stateChanged.connect(self.disable_strcombo)
-        self.strcombo.addItems(streets)
+
+        # disable kpi & str combo - the signal needs the state to be changed to be called
+        self.disable_kpicombo()
+        self.disable_strcombo()
+
+        # signals to update combos based on city indices
+        self.cpscombo.currentIndexChanged.connect(self.updatekpicombo)
+        self.kpicombo.currentIndexChanged.connect(self.updatemodecombo)
 
     def get_settings(self):
 
@@ -109,7 +115,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def updatecpscombo(self):
         self.cpscombo.clear()
         kpi_list = kpis.keys()
-        self.cpscombo.addItems(kpi_list)
+        self.cpscombo.addItems(kpi_list[::-1])
         cps, kpi, mode, street = self.get_settings()
         self.selectionChanged.emit(cps, kpi, mode, street)
         return
@@ -140,6 +146,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def disable_kpicombo(self):
         if self.buildCheckBox.isChecked():
+            print 'build'
             self.kpicombo.setDisabled(False)
             self.modecombo.setDisabled(False)
         else:
@@ -165,35 +172,31 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def get_mode_time(self):
         return self.modecombo.currentText()
+
     #TODO
     def get_districts(self):
         return
 
     def layerCheck(self):
+        # TODO Disable buttons when layer not present
         missing_layers = []
         if self.districts is None:
             missing_layers.append('districts')
-            self.cpscombo.setDisabled(True)
-            self.cityCheckBox.setDisabled(True)
-        else:
-            self.cpscombo.setDisabled(False)
-            self.cityCheckBox.setDisabled(False)
         if self.buildings is None:
             missing_layers.append('buildings')
-            self.kpicombo.setDisabled(True)
-            self.buildCheckBox.setDisabled(True)
-        else:
-            self.kpicombo.setDisabled(False)
-            self.buildCheckBox.setDisabled(False)
         if self.streets is None:
             missing_layers.append('streets')
-            self.strcombo.setDisabled(True)
-            self.strCheckBox.setDisabled(True)
-        else:
-            self.strcombo.setDisabled(False)
-            self.strCheckBox.setDisabled(False)
         if len(missing_layers) > 0:
             self.warning.emit('Missing layers: ' + ', '.join(missing_layers), 2)  # QgsMessageBar.CRITICAL
+        return
+
+    def updateLayers(self):
+        print 'layer added/ removed : update layers'
+        self.districts = getLayerByName(self.layers[0])
+        self.buildings = getLayerByName(self.layers[1])
+        self.streets = getLayerByName(self.layers[2])
+        self.layerCheck()
+        return
 
     def closeEvent(self, event):
         self.closingPlugin.emit()
