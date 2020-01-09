@@ -225,22 +225,28 @@ class CityExplorer:
 
     #--------------------------------------------------------------------------
 
-
     def giveMessage(self, message, level):
         # Gives warning according to message
         self.iface.messageBar().pushMessage("City Explorer: ", "%s" % (message), level, duration=5)
-        print 'message'
         return
 
+    def updateVisuals(self, user_input1, user_input2, tier):
 
-    def updateVisuals(self, cps, kpi, mode, street):
-        #for index, layer in dict(zip([cps, kpi + mode, street], layers)):
-            #if index:
-                #
-        # update maps
-        #apply_symbology
-        applySymbologyFixedDivisions(self.dockwidget.districts, 'liveability_score')
-        self.dockwidget.districts.triggerRepaint()
+        ium_field = IUMField(user_input1, user_input2, tier)
+        print 'col_name', ium_field.ium_column
+
+        layer = None
+        if tier == 1:
+            layer = self.dockwidget.districts
+        elif tier == 2:
+            layer = self.dockwidget.buildings
+        elif tier == 3:
+            layer = self.dockwidget.streets
+
+        # map visualisation
+        if layer:
+            applySymbologyFixedDivisions(layer, ium_field)
+            layer.triggerRepaint()
 
         # update legend
 
@@ -248,7 +254,7 @@ class CityExplorer:
 
         # update charts
 
-        chart = QPixmap(drawHistogram(self.dockwidget.districts,'liveability'))
+        chart = QPixmap(drawHistogram(layer, ium_field))
         chart = chart.scaled(300, 300, aspectRatioMode=Qt.IgnoreAspectRatio, transformMode=Qt.SmoothTransformation)
         self.dockwidget.chartView.setPixmap(chart)
 

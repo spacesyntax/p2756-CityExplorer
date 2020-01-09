@@ -38,7 +38,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     closingPlugin = pyqtSignal()
     warning = pyqtSignal(str, int)
-    selectionChanged = pyqtSignal(str, str, str, str)
+    selectionChanged = pyqtSignal(str, str, int)
 
     def __init__(self, layers, parent=None):
         """Constructor."""
@@ -56,20 +56,10 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # setup info icons on pushbuttons
         info_icon = QtGui.QPixmap(os.path.dirname(__file__) + "/raster/info_icon.png")
-        self.cityInfo.setIcon(QtGui.QIcon(info_icon))
-        self.cityInfo.setIconSize(QSize(18, 18))
 
-        self.buildInfo.setIcon(QtGui.QIcon(info_icon))
-        self.buildInfo.setIconSize(QSize(18, 18))
-
-        self.strInfo.setIcon(QtGui.QIcon(info_icon))
-        self.strInfo.setIconSize(QSize(18, 18))
-
-        self.vacantInfo.setIcon(QtGui.QIcon(info_icon))
-        self.vacantInfo.setIconSize(QSize(18, 18))
-
-        self.transformInfo.setIcon(QtGui.QIcon(info_icon))
-        self.transformInfo.setIconSize(QSize(18, 18))
+        for icon in [self.cityInfo, self.buildInfo, self.strInfo, self.vacantInfo, self.transformInfo]:
+            icon.setIcon(QtGui.QIcon(info_icon))
+            icon.setIconSize(QSize(18, 18))
 
         logo = QtGui.QPixmap(os.path.dirname(__file__) + '/raster/Space_Syntax_logo.png')
         logo = logo.scaled(100, 15, Qt.KeepAspectRatio, Qt.SmoothTransformation)
@@ -78,7 +68,9 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.settings = []
 
         # add items to combos
-        self.updatecpscombo()
+        self.cpscombo.clear()
+        kpi_list = tier2.keys()
+        self.cpscombo.addItems(kpi_list[::-1])
         self.updatekpicombo()
         self.updatemodecombo()
         self.strcombo.addItems(streets)
@@ -100,41 +92,44 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # signals to update combos based on city indices
         self.cpscombo.currentIndexChanged.connect(self.updatekpicombo)
         self.kpicombo.currentIndexChanged.connect(self.updatemodecombo)
-
-    def get_settings(self):
-
-        # TODO get districts list
-        # get vacant plots
-        # get districts, streets, buildings, modes
-        cps = self.get_district_index()
-        kpi = self.get_building_index()
-        mode = self.get_mode_time()
-        street = self.get_street_index()
-        return cps, kpi, mode, street
-
-    def updatecpscombo(self):
-        self.cpscombo.clear()
-        kpi_list = kpis.keys()
-        self.cpscombo.addItems(kpi_list[::-1])
-        cps, kpi, mode, street = self.get_settings()
-        self.selectionChanged.emit(cps, kpi, mode, street)
-        return
+        self.modecombo.currentIndexChanged.connect(self.updatemodeinput)
 
     def updatekpicombo(self):
         self.kpicombo.clear()
         self.kpicombo.addItems(tier2[self.cpscombo.currentText()])
-        cps, kpi, mode, street = self.get_settings()
-        self.selectionChanged.emit(cps, kpi, mode, street)
+        # when cps combo changed
+        user_input = self.get_district_index()
+        if user_input:
+            print 'bef_emit_cps', (user_input, '', 1)
+            self.selectionChanged.emit(user_input, '', 1)
         return
 
     def updatemodecombo(self):
+        # when kpi combo changed
+        user_input = self.get_building_index(), self.get_mode_time()
+        if user_input != (None,None):
+            print 'bef_emit_kpi', (user_input[0], user_input[1], 2)
+            self.selectionChanged.emit(user_input[0], user_input[1], 2)
         self.modecombo.clear()
         selected_kpi = self.kpicombo.currentText()
         if selected_kpi == '':
             return
-        self.modecombo.addItems(modes[selected_kpi])
-        cps, kpi, mode, street = self.get_settings()
-        self.selectionChanged.emit(cps, kpi, mode, street)
+        #TODO was modes[selected_kpi]
+        self.modecombo.addItems(default_modes)
+        return
+
+    def updatestrinput(self):
+        user_input = self.get_building_index(), self.get_mode_time()
+        if user_input != (None, None):
+            print 'bef_emit_str' , (user_input[0], user_input[1], 3)
+            self.selectionChanged.emit(user_input[0], user_input[1], 3)
+        return
+
+    def updatemodeinput(self):
+        user_input = self.get_building_index(), self.get_mode_time()
+        if user_input != (None, None):
+            print 'bef_emit_mode', (user_input[0], user_input[1], 2)
+            self.selectionChanged.emit(user_input[0], user_input[1], 2)
         return
 
     def disable_cpscombo(self):

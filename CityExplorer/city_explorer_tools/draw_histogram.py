@@ -8,18 +8,25 @@ from ..log import *
 
 # https://stackoverflow.com/questions/42886076/matplotlib-radar-chart-axis-labels
 
-def drawHistogram(layer, field ): #TODO districts
+def drawHistogram(layer, field): #TODO districts
 
     # TODO change dynamically based on field
     # colors, chart_legends, map_legends
 
-    colour_scale = colour_scales[field]
-    ranges = {'-1.00-0': '0', '0-0.2': '0-0.2', '0.2-0.4': '0.2-0.4', '0.4-0.6': '0.4-0.6', '0.6-0.8': '0.6-0.8', '0.8-1': '0.8-1'}
+    colors = field.get_colour_scale()
+    ranges = field.get_values_ranges()
+    labels = field.get_style_lables()
+    column_name = field.ium_column
 
     # TODO add filter based on districts
+    data_dict = {}
+    for (min_rng, max_rng) in ranges:
+        filtered_features = filter(lambda f: min_rng < f[column_name] and f[column_name] <= max_rng, layer.getFeatures())
+        data_dict[str(min_rng) + '-' + str(max_rng)] = len(filtered_features)
 
-    #data = map(lambda f: (ranges[f['ranges']], f[field]) if f[field] else (ranges[f['ranges']], 0), layer.getFeatures())
-    #data_dict = dict(data)
+    # TODO edit always first range or last??
+    empty_values = filter(lambda f: f[column_name] is None, layer.getFeatures())
+    #data_dict[ranges[0]] = data_dict[ranges[0]] + len(empty_values)
 
     fig, ax = plt.subplots()
     ind = np.arange(6)
@@ -27,17 +34,18 @@ def drawHistogram(layer, field ): #TODO districts
     # show the figure, but do not block
     # plt.show(block=False)
 
-    p0, p1, p25, p510, p1020, p2050 = plt.bar(ind, [0, 0, 0, 0, 0, 0], align='center')
-    p = [p0, p1, p25, p510, p1020, p2050]
+    p0, p1, p2, p3, p4, p5 = plt.bar(ind, [0, 0, 0, 0, 0, 0], align='center')
+    p = [p0, p1, p2, p3, p4, p5]
 
     for idx, i in enumerate(p):
-        i.set_facecolor(colour_scale[idx])
+        i.set_facecolor(colors[idx])
 
     ax.set_xticks(ind)
-    # TODO setup ranges dynamically & max
+    # TODO setup ranges dynamically & max & axes names
 
-    ax.set_xticklabels( ['a', 'b', 'a', 'b', 'a', 'b']) # ranges
-    ax.set_ylim([0, 100])
+    ax.set_xticklabels(labels) # ranges
+    ax.set_ylim([ranges[0][0], ranges[-1][1]])
+
     ax.set_ylabel('% buildings')
     ax.set_xlabel('number of land uses')
     # ax.set_title('System Monitor')
@@ -55,7 +63,7 @@ def drawHistogram(layer, field ): #TODO districts
         tick.set_color('gray')
 
     for i, k in zip(p, ['0', '1', '2-5', '5-10', '10-20', '20-50', '50-100', '>100']):
-        i.set_height(50)#data_dict[k])
+        i.set_height(50) #data_dict[k])
 
     output_path = os.path.dirname(__file__) + '/foo.png'
     plt.savefig(output_path)
