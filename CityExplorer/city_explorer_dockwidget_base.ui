@@ -38,6 +38,13 @@
       <property name="sizeConstraint">
        <enum>QLayout::SetNoConstraint</enum>
       </property>
+      <item row="19" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Use features</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0" colspan="2">
        <widget class="QCheckBox" name="cityCheckBox">
         <property name="sizePolicy">
@@ -47,7 +54,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>City scale</string>
+         <string>City scale measures</string>
         </property>
        </widget>
       </item>
@@ -59,7 +66,7 @@
        </widget>
       </item>
       <item row="11" column="0" colspan="3">
-       <widget class="QCheckBox" name="checkBox">
+       <widget class="QCheckBox" name="transformCheckBox">
         <property name="text">
          <string>Show transformability index</string>
         </property>
@@ -150,12 +157,12 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Show vacant plots</string>
+         <string>Show potential plots</string>
         </property>
        </widget>
       </item>
       <item row="20" column="1">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="imageExport">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -200,7 +207,7 @@
        </widget>
       </item>
       <item row="20" column="2">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="dataExport">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -256,7 +263,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Street scale</string>
+         <string>Street scale measures</string>
         </property>
        </widget>
       </item>
@@ -269,7 +276,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Building scale</string>
+         <string>Building scale measures</string>
         </property>
        </widget>
       </item>
@@ -278,6 +285,9 @@
         <property name="text">
          <string>City</string>
         </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
        </widget>
       </item>
       <item row="4" column="3">
@@ -310,6 +320,9 @@
         <property name="text">
          <string>Buildings</string>
         </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
        </widget>
       </item>
       <item row="15" column="0">
@@ -317,6 +330,9 @@
         <property name="text">
          <string>Streets</string>
         </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup</string>
+        </attribute>
        </widget>
       </item>
       <item row="13" column="0">
@@ -361,36 +377,6 @@
         </property>
        </widget>
       </item>
-      <item row="19" column="0" colspan="3">
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>Use selected features</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Access to </string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QComboBox" name="kpicombo">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-       </widget>
-      </item>
       <item row="6" column="2">
        <widget class="QComboBox" name="modecombo">
         <property name="sizePolicy">
@@ -432,7 +418,23 @@
         </property>
        </widget>
       </item>
-      <item row="8" column="1">
+      <item row="6" column="0" colspan="2">
+       <widget class="QComboBox" name="kpicombo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0" colspan="2">
        <widget class="QComboBox" name="kpi2combo">
         <property name="minimumSize">
          <size>
@@ -442,6 +444,26 @@
         </property>
        </widget>
       </item>
+      <item row="19" column="2">
+       <widget class="QRadioButton" name="selectedRadio">
+        <property name="text">
+         <string>selected</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup_2</string>
+        </attribute>
+       </widget>
+      </item>
+      <item row="19" column="1">
+       <widget class="QRadioButton" name="allRadio">
+        <property name="text">
+         <string>all</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonGroup_2</string>
+        </attribute>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
@@ -449,4 +471,8 @@
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
+ </buttongroups>
 </ui>

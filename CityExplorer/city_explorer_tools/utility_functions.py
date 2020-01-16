@@ -1,5 +1,7 @@
 
 from qgis.core import  QgsMapLayerRegistry
+import math
+
 
 def getLayerByName(name):
     layer = None
@@ -7,3 +9,7 @@ def getLayerByName(name):
         if i.name() == name:
             layer = i
     return layer
+
+
+def roundup(x):
+    return int(math.ceil(x / 100.0)) * 100

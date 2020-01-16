@@ -27,7 +27,7 @@ def applySymbologyFixedDivisions(layer, field):
 
     colors = field.get_colour_scale()
     ranges = field.get_values_ranges()
-    labels = field.get_style_lables()
+    labels = field.get_style_labels()
     column_name = field.ium_column
     print colors, ranges, labels
 
@@ -37,7 +37,10 @@ def applySymbologyFixedDivisions(layer, field):
     renderer = QgsGraduatedSymbolRendererV2(column_name, rangeList)
     for i in renderer.symbols():
         i.symbolLayer(0).setOutlineColor(QColor("#ffffff"))
-        i.symbolLayer(0).setBorderWidth(0.000001)
+        try:
+            i.symbolLayer(0).setBorderWidth(0.000001)
+        except AttributeError: # if line layer
+            pass
         #i.symbolLayer(0).setOutputUnit(1)
     renderer.setMode(QgsGraduatedSymbolRendererV2.Custom)
     layer.setRendererV2(renderer)

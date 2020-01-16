@@ -21,9 +21,11 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
-from PyQt4.QtGui import QAction, QIcon, QPixmap
+from PyQt4.QtGui import QAction, QFileDialog
 # Initialize Qt resources from file resources.py
 import resources
+import csv
+
 
 # Import the code for the DockWidget
 from city_explorer_dockwidget import CityExplorerDockWidget
@@ -201,6 +203,20 @@ class CityExplorer:
         self.dockwidget.cpscombo.currentIndexChanged.disconnect(self.dockwidget.updatekpicombo)
         self.dockwidget.kpicombo.currentIndexChanged.disconnect(self.dockwidget.updatemodecombo)
 
+        self.dockwidget.vacantCheckBox.stateChanged.disconnect(self.dockwidget.make_plots_visible)
+        self.dockwidget.transformCheckBox.stateChanged.disconnect(self.dockwidget.make_transform_idx_visible)
+
+        self.dockwidget.districtsRadio.toggled.disconnect(self.updateCityChart)
+        self.dockwidget.buildingsRadio.toggled.disconnect(self.updateBuildChart)
+        self.dockwidget.streetsRadio.toggled.disconnect(self.updateStrChart)
+
+        self.dockwidget.imageExport.clicked.disconnect(self.dockwidget.saveOutput)
+
+        self.dockwidget.allRadio.clicked.disconnect(self.refreshChart)
+        self.dockwidget.selectedRadio.clicked.disconnect(self.refreshChart)
+
+        self.dockwidget.dataExport.clicked.disconnect(self.saveData)
+
         # remove this statement if dockwidget is to remain
         # for reuse if plugin is reopened
         # Commented next statement since it causes QGIS crashe
@@ -252,12 +268,73 @@ class CityExplorer:
 
         # update zoom only when specific districts are selected
 
-        # update charts
+        # update chart only if the tier matches
 
-        chart = QPixmap(drawHistogram(layer, ium_field))
-        chart = chart.scaled(300, 300, aspectRatioMode=Qt.IgnoreAspectRatio, transformMode=Qt.SmoothTransformation)
-        self.dockwidget.chartView.setPixmap(chart)
+        if (tier == 1 and self.dockwidget.districtsRadio.isChecked()) or \
+                (tier == 2 and self.dockwidget.buildingsRadio.isChecked()) or \
+                (tier == 3 and self.dockwidget.streetsRadio.isChecked()):
 
+            output_path, data = drawHistogram(self.iface, layer, ium_field, self.dockwidget.getSelected())
+            chart = QPixmap(output_path)
+            chart = chart.scaled(300, 300, aspectRatioMode=Qt.IgnoreAspectRatio, transformMode=Qt.SmoothTransformation)
+            self.dockwidget.chartView.setPixmap(chart)
+
+        return
+
+    def updateCityChart(self):
+        if self.dockwidget.districtsRadio.isChecked():
+            layer = self.dockwidget.districts
+            ium_field = IUMField(self.dockwidget.get_district_index(), '', 1)
+            output_path, data = drawHistogram(self.iface, layer, ium_field, self.dockwidget.getSelected())
+            chart = QPixmap(output_path)
+            chart = chart.scaled(300, 300, aspectRatioMode=Qt.IgnoreAspectRatio, transformMode=Qt.SmoothTransformation)
+            self.dockwidget.chartView.setPixmap(chart)
+        return
+
+    def updateStrChart(self):
+        if self.dockwidget.streetsRadio.isChecked():
+            layer = self.dockwidget.streets
+            ium_field = IUMField(self.dockwidget.get_street_index(), '', 3)
+            chart = QPixmap(drawHistogram(self.iface, layer, ium_field, self.dockwidget.getSelected()))
+            chart = chart.scaled(300, 300, aspectRatioMode=Qt.IgnoreAspectRatio, transformMode=Qt.SmoothTransformation)
+            self.dockwidget.chartView.setPixmap(chart)
+        return
+
+    def updateBuildChart(self):
+        if self.dockwidget.buildingsRadio.isChecked():
+            layer = self.dockwidget.buildings
+            if self.dockwidget.kpi2combo.isEnabled() and self.dockwidget.get_building2_index() != 'all':
+                ium_field = IUMField(self.dockwidget.get_building2_index(), self.dockwidget.get_mode_time(), 2)
+            else:
+                ium_field = IUMField(self.dockwidget.get_building_index(), self.dockwidget.get_mode_time(), 2)
+            chart = QPixmap(drawHistogram(self.iface, layer, ium_field, self.dockwidget.getSelected()))
+            chart = chart.scaled(300, 300, aspectRatioMode=Qt.IgnoreAspectRatio, transformMode=Qt.SmoothTransformation)
+            self.dockwidget.chartView.setPixmap(chart)
+        return
+
+    def updateChart(self):
+        if self.dockwidget.districtsRadio.isChecked():
+            self.updateCityChart()
+        elif self.dockwidget.streetsRadio.isChecked():
+            self.updateStrChart()
+        elif self.dockwidget.buildingsRadio.isChecked():
+            self.updateBuildChart()
+        return
+
+    def refreshChart(self):
+        print 'refresh'
+        self.dockwidget.setSelected()
+        self.updateChart()
+        return
+
+    def saveData(self, data_dict):
+        file_name = QFileDialog.getSaveFileName(self, "Save data as ", "data", '*.csv')
+        with open(file_name, mode='w') as csv_file:
+            fieldnames = ['ranges', 'percentage']
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writeheader()
+            for k, v in data_dict.items():
+                writer.writerow({'ranges': k, 'percentage': v})
         return
 
     def run(self):
@@ -268,14 +345,15 @@ class CityExplorer:
 
             #print "** STARTING CityExplorer"
 
+            self.legend = self.iface.legendInterface()
+
             # dockwidget may not exist if:
             #    first run of plugin
             #    removed on close (see self.onClosePlugin method)
             if self.dockwidget == None:
                 # Create the dockwidget (after translation) and keep reference
-                self.dockwidget = CityExplorerDockWidget(['sectors', 'buildings', 'spm_ex_seg_mm'])
-
-            self.legend = self.iface.legendInterface()
+                self.dockwidget = CityExplorerDockWidget(['city_scale', 'building_scale', 'street_scale', 'vacant_plots', 'transformability_index',
+                                                          'city_scale_summary_stats', 'building_scale_summary_stats', 'street_scale_summary_stats' ], self.legend)
 
             # connect to provide cleanup on closing of dockwidget
             self.dockwidget.closingPlugin.connect(self.onClosePlugin)
@@ -286,10 +364,20 @@ class CityExplorer:
             self.legend.itemRemoved.connect(self.dockwidget.updateLayers)
             self.dockwidget.selectionChanged.connect(self.updateVisuals)
 
+            self.dockwidget.districtsRadio.setChecked(True)
+            self.dockwidget.districtsRadio.toggled.connect(self.updateCityChart)
+            self.dockwidget.buildingsRadio.toggled.connect(self.updateBuildChart)
+            self.dockwidget.streetsRadio.toggled.connect(self.updateStrChart)
+
+            self.dockwidget.allRadio.clicked.connect(self.refreshChart)
+            self.dockwidget.selectedRadio.clicked.connect(self.refreshChart)
+
+            self.dockwidget.dataExport.clicked.connect(self.saveData)
+
             # check layers on loading the widget
             self.dockwidget.layerCheck()
 
             # show the dockwidget
             self.iface.addDockWidget(Qt.RightDockWidgetArea, self.dockwidget)
             self.dockwidget.show()
-
+            self.updateCityChart()
