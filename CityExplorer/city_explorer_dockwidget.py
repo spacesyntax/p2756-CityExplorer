@@ -24,6 +24,7 @@
 import os
 from log import *
 import shutil
+import csv
 
 from qgis.gui import QgsMessageBar
 from PyQt4 import QtGui, uic
@@ -60,6 +61,8 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.districts_statistics = getLayerByName(self.layers[5])
         self.buildings_statistics = getLayerByName(self.layers[6])
         self.streets_statistics = getLayerByName(self.layers[7])
+
+        self.chart_data = None
 
         # setup info icons on pushbuttons
         info_icon = QtGui.QPixmap(os.path.dirname(__file__) + "/raster/info_icon.png")
@@ -337,6 +340,16 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
             return False
         else:
             return True
+
+    def saveData(self):
+        file_name = QtGui.QFileDialog.getSaveFileName(self, "Save data as ", "data", '*.csv')
+        with open(file_name, mode='w') as csv_file:
+            fieldnames = ['ranges', 'percentage']
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writeheader()
+            for k, v in self.chart_data.items():
+                writer.writerow({'ranges': k, 'percentage': v})
+        return
 
     def closeEvent(self, event):
         self.closingPlugin.emit()

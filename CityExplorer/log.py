@@ -34,7 +34,7 @@ lu_abbr = {
 tier2 = {'liveability': #['edu', 'social', 'act_green', 'mscale_length'],
                         ['education', 'parks', 'cultural facilities', 'vibrancy'],
           # 'sustainability': ['pop_score', 'energy_mean_total'],
-          'sustainability': ['population coverage', 'energy consumption?'],
+          'sustainability': ['energy consumption'],
           'health':     #['hcare', 'phys', 'pt_stops', 'mixeduse', 'car_depend'],
                         ['healthcare', 'sport facilities', 'public transport', 'car dependence', 'walkability'],
           'combined':    #['edu', 'social', 'act_green', 'mscale_length', 'pop_score', 'energy_mean_total', 'hcare', 'phys', 'pt_stops', 'mixeduse', 'car_depend']
@@ -51,12 +51,35 @@ streets = ['Multi-scale accessibility', 'local choice', 'global choice', 'local 
 
 # COLOURS RANGES
 
-# TODO added light grey & setup transparency change 'color':'#ffffff' with 'color':'0,0,0,0' - ast 0 is transoarency )
-colour_scales = {'combined':         ["#D3D3D3", "#fafafa", "#bcbcbc", "#7f7f7f","#424242", "#050505"],
-                 'liveability':     ["#D3D3D3", "#ffffff", "#ecbfbf", "#d98080", "#c64040", "#b30000"],
-                 'sustainabilty':   ["#f7fcf5", "#caeac3", "#7bc87c", "#2a924a", "#00441b"],
-                 'health':          ["#D3D3D3","#f7fbff", "#c8ddf0", "#73b3d8", "#2879b9", "#2879b9", "#08306b"]}
+colour_scales = {
 
+'liveability':    ["#ffffff", "#efcccc", "#e09999", "#d16666","#c23333","#b30000"],
+'sustainability': ["#f7fcf5","#d4eece","#9dd798","#54b466","#1d8640","#00441b"] ,
+'health':         ["#f7fbff","#d1e2f2","#9ac7e0","#519ccc","#1c6bb0","#08306b"],
+'combined':       ["#fafafa","#c9c9c9","#989898","#676767","#363636","#050505"],
+
+            'education': ["#f7fbff", "#b0d2e8", "#3e8ec4", "#08306b"],
+
+            'nurseries': ["#f7fbff", "#b0d2e8", "#3e8ec4", "#08306b"],
+            'primary & secondary education': ["#f7fbff", "#b0d2e8", "#3e8ec4", "#08306b"],
+            'higher education faculties': ["#f7fbff", "#b0d2e8", "#3e8ec4", "#08306b"],
+
+            'healthcare': ["#fff5eb","#fdd1ab","#ff7e33","#dc3e00"],
+            'primary healthcare facilities': ["#fff5eb","#fdd1ab","#ff7e33","#dc3e00"],
+            'secondary healthcare facilities': ["#fff5eb","#fdd1ab","#ff7e33","#dc3e00"],
+
+            'sport facilities': ["#fefeda","#fff063","#e6ff00","#8bfc00"],
+            'cultural facilities': ["#edf8fb","#a6bbda","#896bb2","#810f7c"],
+            'public transport': ["#08306b","#3e8ec4","#b0d2e8","#f7fbff"],
+
+'parks': ["#f7fcf5","#b2e0ab","#3da75a","#00441b"],
+'vibrancy' : ["#ffffff", "#efcccc", "#e09999", "#d16666","#c23333","#b30000"],
+'multi-scale accessibility': '', # TODO
+'local choice': ["#0000ff","#0050ff","#00b0ff","#00ffff","#00ffb0","#00ff50","#30ff00","#60ff00","#a0ff00","#d0ff00","#ffff00","#ffd000","#ffa000","#ff6000","#ff3000","#ff0000"],
+'global choice': ["#0000ff","#0050ff","#00b0ff","#00ffff","#00ffb0","#00ff50","#30ff00","#60ff00","#a0ff00","#d0ff00","#ffff00","#ffd000","#ffa000","#ff6000","#ff3000","#ff0000"],
+'local integration': ["#0000ff","#0050ff","#00b0ff","#00ffff","#00ffb0","#00ff50","#30ff00","#60ff00","#a0ff00","#d0ff00","#ffff00","#ffd000","#ffa000","#ff6000","#ff3000","#ff0000"],
+'global integration': ["#0000ff","#0050ff","#00b0ff","#00ffff","#00ffb0","#00ff50","#30ff00","#60ff00","#a0ff00","#d0ff00","#ffff00","#ffd000","#ffa000","#ff6000","#ff3000","#ff0000"]
+}
 
 # MODES
 
@@ -82,6 +105,7 @@ custom_modes = {
 default_ranges = [[0, 0], [0, 0.2], [0.2, 0.4], [0.4, 0.6], [0.6, 0.8], [0.8, 1]]
 default_choices_ranges = [[0, 0], [1, 2], [2, 3], [3, 10000000000]]
 default_choices_ranges_big = [[0, 5], [5, 10], [10, 15], [15, 1000]]
+ssx_ranges = [[0, 0.333212394316885], [0.333212394316885,0.351122560511418], [0.351122560511418,0.36903272670595],[0.36903272670595,0.388567303322778],[0.388567303322778,0.404853059095015],[0.404853059095015,0.422763225289548],[0.422763225289548,0.440256875991184],[0.440256875991184,0.458167042185717],[0.458167042185717,0.47607720838025][0.47607720838025,0.493987374574782],[0.493987374574782,0.511897540769315],[0.511897540769315,0.529807706963847],[0.529807706963847,0.547301357665484],[0.547301357665484,0.565211523860016][0.565211523860016,0.583121690054549],[0.583121690054549,1]]
 
 # overall - between 0 - 1
 
@@ -89,6 +113,7 @@ default_choices_ranges_big = [[0, 5], [5, 10], [10, 15], [15, 1000]]
 
 default_labels = ['0', '0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1']
 default_choices_labels = ['0', '1-2', '2-3', '>3']
+ssx_labels = []
 default_choices_labels_big = ['0-5', '5-10', '10-15', '>15']
 
 # CHART LABELS
@@ -109,17 +134,14 @@ class IUMField(QObject):
             self.ium_column = self.user_input[:-6] + '_score'
         elif self.tier == 2:
             # get land use abbreviations
-            if self.user_input == 'Vibrancy':
-                self.ium_column = lu_abbr[self.user_input]
-            else:
+            try:
+                self.ium_column = 'sum_count_id_' + lu_abbr[self.user_input[10:]] + '_' + modes_abbr[self.mode_input]
+            except KeyError:
+                # replace _ with spaces
                 try:
-                    self.ium_column = 'sum_count_id_' + lu_abbr[self.user_input[10:]] + '_' + modes_abbr[self.mode_input]
+                    self.ium_column = 'sum_count_id_' + lu_abbr[self.user_input] + '_' + modes_abbr[self.mode_input]
                 except KeyError:
-                    # replace _ with spaces
-                    try:
-                        self.ium_column = 'sum_count_id_' + lu_abbr[self.user_input] + '_' + modes_abbr[self.mode_input]
-                    except KeyError:
-                        self.ium_column = self.user_input.replace(' ', '_')
+                    self.ium_column = self.user_input.replace(' ', '_')
         elif self.tier == 3:
             self.ium_column = lu_abbr[self.user_input]
 
@@ -130,7 +152,10 @@ class IUMField(QObject):
             else:
                 return default_choices_ranges
         else:
-            return default_ranges
+            if self.tier == 3:
+                return  ssx_ranges
+            else:
+                return default_ranges
 
     def get_style_labels(self):
         if self.ium_column[0:12] == 'sum_count_id':
@@ -139,16 +164,23 @@ class IUMField(QObject):
             else:
                 return default_choices_labels
         else:
-            return default_labels
+            if self.tier == 3:
+                return  ssx_labels
+            else:
+                return default_labels
 
     # function to return color scales
     def get_colour_scale(self):
+        if self.tier == 1:
+            return colour_scales[self.user_input[:-6]]
+        elif self.tier == 2:
+            try:
+                return colour_scales[self.user_input[10:]]
+            except KeyError:
+                return colour_scales[self.user_input]
+        elif self.tier == 3:
+            return colour_scales[self.user_input]
 
-        return colour_scales['liveability']
-
-    def get_total(self):
-
-        return
 
     def get_x_axis(self):
         if self.ium_column[0:19] == 'sum_count_id_social':
