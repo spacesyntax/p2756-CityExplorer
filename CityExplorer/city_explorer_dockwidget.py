@@ -26,6 +26,8 @@ from log import *
 import shutil
 import csv
 
+from info_log import *
+
 from qgis.gui import QgsMessageBar
 from PyQt4 import QtGui, uic
 from PyQt4.QtCore import pyqtSignal, QSize, Qt
@@ -42,7 +44,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
     warning = pyqtSignal(str, int)
     selectionChanged = pyqtSignal(str, str, int)
 
-    def __init__(self, layers, legend, parent=None):
+    def __init__(self, layers, legend, iface, parent=None):
         """Constructor."""
         super(CityExplorerDockWidget, self).__init__(parent)
         # Set up the user interface from Designer.
@@ -52,6 +54,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
         self.layers = layers
+        self.iface = iface
         self.districts = getLayerByName(self.layers[0])
         self.buildings = getLayerByName(self.layers[1])
         self.streets = getLayerByName(self.layers[2])
@@ -117,12 +120,16 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # exports
         self.imageExport.clicked.connect(self.saveOutput)
 
+        # info buttons
+        self.cityInfo.clicked.connect(self.getCityInfo)
+        self.strInfo.clicked.connect(self.getStreetInfo)
+        self.buildInfo.clicked.connect(self.getBuildInfo)
 
     def updatekpicombo(self):
         self.kpicombo.blockSignals(True)
         self.kpicombo.clear()
         kpi_list = tier2[self.cpscombo.currentText()[:-6]]
-        kpi_list = ['Access to '+i if i not in ['walkability', 'vibrancy', 'car dependence', 'population coverage', 'energy consumption'] else i for i in kpi_list]
+        kpi_list = ['Access to '+i if i not in ['Walkability', 'Vibrancy', 'Car dependence', 'Energy consumption'] else i for i in kpi_list]
         self.kpicombo.addItems(kpi_list) # remove word index
 
         self.kpicombo.blockSignals(False)
@@ -349,6 +356,37 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
             writer.writeheader()
             for k, v in self.chart_data.items():
                 writer.writerow({'ranges': k, 'percentage': v})
+        return
+
+    def getCityInfo(self):
+        info_text = info_buttons[self.cpscombo.currentText()[:-6]]
+        self.showInfoPopUp(info_text)
+        return
+
+    def getStreetInfo(self):
+        info_text = info_buttons[self.strcombo.currentText()]
+        self.showInfoPopUp(info_text)
+        return
+
+    def getBuildInfo(self):
+        info_text = info_buttons[self.kpicombo.currentText()]
+        self.showInfoPopUp(info_text)
+        return
+
+    def getPlotInfo(self):
+        info_text = info_buttons['potential plots']
+        self.showInfoPopUp(info_text)
+        return
+
+    def getTransformInfo(self):
+        info_text = info_buttons['transformability index']
+        self.showInfoPopUp(info_text)
+        return
+
+    def showInfoPopUp(self, info_text):
+
+        from PyQt4 import QtGui
+        info = QtGui.QMessageBox.information(self.iface.mainWindow(), '', info_text)
         return
 
     def closeEvent(self, event):

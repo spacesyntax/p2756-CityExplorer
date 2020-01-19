@@ -32,7 +32,8 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
     else:
         layer_name = layer.name()
         layer = getLayerByName(layer_name + '_summary_stats')
-        data_dict = {f['ranges']: f[column_name] for f in layer.getFeatures()}
+        #TODO specify corect for buildings
+        data_dict = {f['ranges']: float(f[column_name]) for f in layer.getFeatures()}
 
     print 'data', data_dict
 

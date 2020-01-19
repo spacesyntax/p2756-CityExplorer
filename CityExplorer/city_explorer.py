@@ -345,7 +345,7 @@ class CityExplorer:
             if self.dockwidget == None:
                 # Create the dockwidget (after translation) and keep reference
                 self.dockwidget = CityExplorerDockWidget(['city_scale', 'building_scale', 'street_scale', 'potential_plots', 'transformability_index',
-                                                          'city_scale_summary_stats', 'building_scale_summary_stats', 'street_scale_summary_stats' ], self.legend)
+                                                          'city_scale_summary_stats', 'building_scale_summary_stats', 'street_scale_summary_stats' ], self.legend, self.iface)
 
             # connect to provide cleanup on closing of dockwidget
             self.dockwidget.closingPlugin.connect(self.onClosePlugin)
