@@ -35,12 +35,12 @@ lu_abbr = {
 tier2 = {'Liveability': #['edu', 'social', 'act_green', 'mscale_length'],
                         ['education', 'parks', 'cultural facilities', 'Vibrancy'],
           # 'sustainability': ['pop_score', 'energy_mean_total'],
-          'Sustainability': ['aaaa','Energy consumption', 'aaaaa'],
+          'Sustainability': ['Energy consumption'],
           'Health':     #['hcare', 'phys', 'pt_stops', 'mixeduse', 'car_depend'],
                         ['healthcare', 'sport facilities', 'public transport', 'Car dependence', 'Walkability'],
           'Combined':    #['edu', 'social', 'act_green', 'mscale_length', 'pop_score', 'energy_mean_total', 'hcare', 'phys', 'pt_stops', 'mixeduse', 'car_depend']
                         [ 'education', 'parks', 'cultural facilities', 'Vibrancy',
-                         'healthcare', 'sport facilities', 'public transport', 'Car dependence', 'Walkability'],
+                         'healthcare', 'sport facilities', 'public transport', 'Car dependence', 'Walkability', 'Energy consumption'],
           }
 
 tier3 = {'Access to education': ['all', 'nurseries', 'primary & secondary education', 'higher education faculties'],
@@ -81,7 +81,8 @@ colour_scales = {
 'Local integration': ["#0000ff","#0050ff","#00b0ff","#00ffff","#00ffb0","#00ff50","#30ff00","#60ff00","#a0ff00","#d0ff00","#ffff00","#ffd000","#ffa000","#ff6000","#ff3000","#ff0000"],
 'Global integration': ["#0000ff","#0050ff","#00b0ff","#00ffff","#00ffb0","#00ff50","#30ff00","#60ff00","#a0ff00","#d0ff00","#ffff00","#ffd000","#ffa000","#ff6000","#ff3000","#ff0000"],
 'Energy consumption': ["#ffffff", "#efcccc", "#e09999", "#d16666","#c23333","#b30000"],
-'Car dependence': ["#ffffff","#f1eef6","#da9ccc","#d358ac","#d358ac","#3c008c"] }
+'Car dependence': ["#ffffff","#f1eef6","#da9ccc","#d358ac","#d358ac","#3c008c"],
+'Walkability': ["#f7fbff","#d1e2f2","#9ac7e0","#519ccc","#1c6bb0","#08306b"]}
 
 # MODES
 
@@ -118,9 +119,43 @@ ssx_int_ranges = [[0.00134057675715326,0.0637574933181945],[0.0637574933181945,0
 
 default_labels = ['0', '0-0.2', '0.2-0.4', '0.4-0.6', '0.6-0.8', '0.8-1']
 default_choices_labels = ['0', '1-2', '2-3', '>3']
-ssx_labels = ['' for i in range(0, 16) ]
-ssx_labels[0] = 'low'
-ssx_labels[-1] = 'high'
+ssx_choice_labels  = [
+    '0-0.333212394316885',
+    '0.333212394316885-0.351122560511418'		,
+    '0.351122560511418-0.36903272670595'		,
+    '0.36903272670595-0.388567303322778'		,
+    '0.388567303322778-0.404853059095015'		,
+    '0.404853059095015-0.422763225289548'		,
+    '0.422763225289548-0.440256875991184'		,
+    '0.440256875991184-0.458167042185717'		,
+    '0.458167042185717-0.47607720838025'		,
+    '0.47607720838025-0.493987374574782'		,
+    '0.493987374574782-0.511897540769315'		,
+    '0.511897540769315-0.529807706963847'		,
+    '0.529807706963847-0.547301357665484'		,
+    '0.547301357665484-0.565211523860016'		,
+    '0.565211523860016-0.583121690054549'		,
+    '0.583121690054549-1'
+]
+ssx_int_labels= [
+'0.00134057675715326-0.0637574933181945'	,
+'0.0637574933181945-0.188591326440277'	,
+'0.188591326440277-0.251005432567865'	,
+'0.251005432567865-0.313422349128906'	,
+'0.313422349128906-0.375839265689947'	,
+'0.375839265689947-0.375839265689947'	,
+'0.375839265689947-0.438256182250989'	,
+'0.438256182250989-0.500670288378577'	,
+'0.500670288378577-0.563087204939618'	,
+'0.563087204939618-0.625504121500659'	,
+'0.625504121500659-0.6879210380617'	,
+'0.6879210380617-0.750335144189288'	,
+'0.750335144189288-0.812752060750329'	,
+'0.812752060750329-0.875168977311371'	,
+'0.875168977311371-0.937585893872412'	,
+'0.937585893872412-1'
+]
+
 
 # CHART LABELS
 
@@ -169,8 +204,10 @@ class IUMField(QObject):
             return default_choices_labels
         else:
             if self.tier == 3:
-                if self.ium_column[0:5] == 'nachr' or self.ium_column[0:4] == 'intr':
-                    return ssx_labels
+                if self.ium_column[0:5] == 'nachr':
+                    return ssx_choice_labels
+                elif self.ium_column[0:4] == 'intr':
+                    return ssx_int_labels
                 else:
                     return # TODO MS_SCALE
             else:

@@ -32,6 +32,12 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
     else:
         layer_name = layer.name()
         layer = getLayerByName(layer_name + '_summary_stats')
+        if column_name[0:5] == 'nachr':
+            layer = getLayerByName(layer_name + '_summary_stats_nach')
+        elif column_name[0:4] == 'intr':
+            layer = getLayerByName(layer_name + '_summary_stats_int')
+        elif column_name in ['vibrancy', 'walkability', 'car_dependence', 'energy_consumption']:
+            layer = getLayerByName(layer_name + '_summary_stats_0_1')
         #TODO specify corect for buildings
         data_dict = {f['ranges']: float(f[column_name]) for f in layer.getFeatures()}
 
@@ -46,6 +52,9 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
     if len(ranges) == 4:
         p0, p1, p2, p3 = plt.bar(ind, [0, 0, 0, 0], align='center')
         p = [p0, p1, p2, p3]
+    elif len(ranges) == 16:
+        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15 = plt.bar(ind, [0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0], align='center')
+        p = [p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15]
     else:
         p0, p1, p2, p3, p4, p5 = plt.bar(ind, [0, 0, 0, 0, 0, 0], align='center')
         p = [p0, p1, p2, p3, p4, p5]
@@ -54,7 +63,10 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
         i.set_facecolor(colors[idx])
 
     ax.set_xticks(ind)
-    ax.set_xticklabels(labels) # ranges
+    if len(labels) == 16:
+        ax.set_xticklabels(['low', '', '', '','','','','','','','','','','','','high'])
+    else:
+        ax.set_xticklabels(labels) # ranges
 
     ax.set_ylim([0, roundup(max(data_dict.values()))]) # [ranges[0][0], ranges[-1][1]]
 
@@ -76,7 +88,7 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
 
     for i, k in zip(p, labels):
         # TODO % or actual value?
-        i.set_height(data_dict[k])
+        i.set_height(float(data_dict[k]))
 
     output_path = os.path.dirname(__file__) + '/foo.png'
     plt.savefig(output_path)

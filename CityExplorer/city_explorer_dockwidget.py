@@ -92,8 +92,8 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.cityCheckBox.setChecked(True)
         self.districtsRadio.setChecked(True)
         self.allRadio.setChecked(True)
-        self.buildCheckBox.setChecked(False)
-        self.strCheckBox.setChecked(False)
+        self.buildCheckBox.setChecked(True)
+        self.strCheckBox.setChecked(True)
 
         # signals to disable/enable layers
         self.cityCheckBox.stateChanged.connect(self.disable_cpscombo)
@@ -126,13 +126,13 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.buildInfo.clicked.connect(self.getBuildInfo)
 
     def updatekpicombo(self):
-        self.kpicombo.blockSignals(True)
+        #self.kpicombo.blockSignals(True)
         self.kpicombo.clear()
         kpi_list = tier2[self.cpscombo.currentText()[:-6]]
         kpi_list = ['Access to '+i if i not in ['Walkability', 'Vibrancy', 'Car dependence', 'Energy consumption'] else i for i in kpi_list]
         self.kpicombo.addItems(kpi_list) # remove word index
 
-        self.kpicombo.blockSignals(False)
+        #self.kpicombo.blockSignals(False)
 
         self.kpi2combo.blockSignals(True)
         self.kpi2combo.clear()
@@ -217,6 +217,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         if self.cityCheckBox.isChecked():
             self.cpscombo.setDisabled(False)
             self.legend.setLayerVisible(self.districts, True)
+            self.selectionChanged.emit(self.get_district_index(), '', 2)
         else:
             self.cpscombo.setDisabled(True)
             self.legend.setLayerVisible(self.districts, False)
@@ -230,6 +231,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 self.kpi2combo.setDisabled(True)
             else:
                 self.kpi2combo.setDisabled(False)
+                self.selectionChanged.emit(self.get_building_index(), self.get_mode_time(), 2)
             self.modecombo.setDisabled(False)
             self.legend.setLayerVisible(self.buildings, True)
         else:
@@ -243,6 +245,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         if self.strCheckBox.isChecked():
             self.strcombo.setDisabled(False)
             self.legend.setLayerVisible(self.streets, True)
+            self.selectionChanged.emit(self.get_street_index(), '', 2)
         else:
             self.strcombo.setDisabled(True)
             self.legend.setLayerVisible(self.streets, False)

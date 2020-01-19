@@ -217,6 +217,18 @@ class CityExplorer:
 
         self.dockwidget.dataExport.clicked.disconnect(self.dockwidget.saveData)
 
+
+        # signals to update combos based on selected indices (only city and building scales)
+
+        self.dockwidget.modecombo.currentIndexChanged.disconnect(self.dockwidget.updatemodeinput)
+        self.dockwidget.strcombo.currentIndexChanged.disconnect(self.dockwidget.updatestrinput)
+        self.dockwidget.kpi2combo.currentIndexChanged.disconnect(self.dockwidget.updatekpi2combo)
+
+        # info buttons
+        self.dockwidget.cityInfo.clicked.connect(self.dockwidget.getCityInfo)
+        self.dockwidget.strInfo.clicked.connect(self.dockwidget.getStreetInfo)
+        self.dockwidget.buildInfo.clicked.connect(self.dockwidget.getBuildInfo)
+
         # remove this statement if dockwidget is to remain
         # for reuse if plugin is reopened
         # Commented next statement since it causes QGIS crashe
@@ -345,7 +357,7 @@ class CityExplorer:
             if self.dockwidget == None:
                 # Create the dockwidget (after translation) and keep reference
                 self.dockwidget = CityExplorerDockWidget(['city_scale', 'building_scale', 'street_scale', 'potential_plots', 'transformability_index',
-                                                          'city_scale_summary_stats', 'building_scale_summary_stats', 'street_scale_summary_stats' ], self.legend, self.iface)
+                                                          'city_scale_summary_stats', 'building_scale_summary_stats', 'street_scale_summary_stats_nach', 'street_scale_summary_stats_int' ], self.legend, self.iface)
 
             # connect to provide cleanup on closing of dockwidget
             self.dockwidget.closingPlugin.connect(self.onClosePlugin)
