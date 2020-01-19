@@ -101,7 +101,6 @@ custom_modes = {
         'Walkability': ['all modes'], # walkability
         'Car dependence': ['car:public transport'], # 'car dependence'
         'Energy consumption': ['all modes']
-        #TODO 'jobs': ['30min car', '30min public transport'] #  'jobs'
 }
 
 # RANGES
@@ -143,7 +142,7 @@ ssx_int_labels= [
 '0.188591326440277-0.251005432567865'	,
 '0.251005432567865-0.313422349128906'	,
 '0.313422349128906-0.375839265689947'	,
-'0.375839265689947-0.375839265689947'	,
+'0.375839265689947-0.375839265689947'	, # TODO - fix
 '0.375839265689947-0.438256182250989'	,
 '0.438256182250989-0.500670288378577'	,
 '0.500670288378577-0.563087204939618'	,
