@@ -48,7 +48,7 @@ tier3 = {'Access to education': ['all', 'nurseries', 'primary & secondary educat
 }
 
 # tier 3 - streets
-streets = ['Multi-scale accessibility', 'Local choice', 'Global choice', 'Local integration', 'Global integration']
+streets = ['Local choice', 'Global choice', 'Local integration', 'Global integration'] # TODO 'Multi-scale accessibility'
 
 # COLOURS RANGES
 

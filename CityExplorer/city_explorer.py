@@ -25,6 +25,8 @@ from PyQt4.QtGui import QAction, QFileDialog
 # Initialize Qt resources from file resources.py
 import resources
 import csv
+from .city_explorer_tools.landuse_log import *
+
 
 
 # Import the code for the DockWidget
@@ -275,6 +277,17 @@ class CityExplorer:
         if layer:
             applySymbologyFixedDivisions(layer, ium_field)
             layer.triggerRepaint()
+
+        # land use layer
+        land_use_layer = getLayerByName('land_use')
+        try:
+            query = land_use_queries[user_input1]
+            land_use_layer.setSubsetString(query)
+            land_use_layer.triggerRepaint()
+            print 'land use query', query
+        except KeyError:
+            print user_input1
+            land_use_layer.setSubsetString("")
 
         # update legend
 
