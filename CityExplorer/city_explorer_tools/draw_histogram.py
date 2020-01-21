@@ -36,6 +36,8 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
             layer = getLayerByName(layer_name + '_summary_stats_nach')
         elif column_name[0:4] == 'intr':
             layer = getLayerByName(layer_name + '_summary_stats_int')
+        elif column_name == 'car_dependence':
+            layer = getLayerByName(layer_name + '_summary_stats_cardep')
         elif column_name in ['vibrancy', 'walkability', 'car_dependence', 'energy_consumption']:
             layer = getLayerByName(layer_name + '_summary_stats_0_1')
         #TODO specify corect for buildings
@@ -65,6 +67,8 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
     ax.set_xticks(ind)
     if len(labels) == 16:
         ax.set_xticklabels(['low', '', '', '','','','','','','','','','','','','high'])
+    elif column_name == 'car_dependence':
+        ax.set_xticklabels(['0-0.0003', '0.0003-0.0012', '0.0.0012-0.0018', '0.0018-0.003', '0.003-0.007', '0.007-1'])
     else:
         ax.set_xticklabels(labels) # ranges
 
