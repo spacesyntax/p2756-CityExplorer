@@ -286,7 +286,7 @@ class CityExplorer:
             land_use_layer.triggerRepaint()
             print 'land use query', query
         except KeyError:
-            print user_input1
+            print 'land use 2', user_input1
             land_use_layer.setSubsetString("")
 
         # update legend

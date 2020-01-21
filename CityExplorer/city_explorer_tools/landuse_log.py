@@ -1,10 +1,10 @@
 land_use_queries = {
 'Liveability index' :           "lu_group IN ('edu', 'act_park', 'act_park') ",
-'Access to Schools ':    "lu_group = 'edu'",
-'Access to nurseries':	"lu_subgroup	=	'edu_nursery'",
+'Access to education':    "lu_group = 'edu'",
+'nurseries':	"lu_subgroup	=	'edu_nursery'",
 'primary & secondary education':	"lu_subgroup 	=	'edu_secondary'",
 'higher education faculties':	"lu_subgroup 	=	'edu_higher'",
-'Access to parks ':      "lu_group =	'act_park'",
+'Access to parks':      "lu_group =	'act_park'",
 'Access to cultural facilities': "lu_group =	'social'",
 'Health index':                "lu_group IN 	('phys', 'hcare', 'pt_stop')",
 'Access to sport facilities': "lu_group =	'phys'",
