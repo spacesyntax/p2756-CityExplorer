@@ -180,7 +180,7 @@ class IUMField(QObject):
         self.mode_input = mode_input
         self.tier = tier
         self.ium_column = None
-        print self.tier
+        #print self.tier
         if self.tier == 1:
             self.ium_column = self.user_input[:-6].lower() + '_score'
         elif self.tier == 2:

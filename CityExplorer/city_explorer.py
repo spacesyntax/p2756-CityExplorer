@@ -263,7 +263,7 @@ class CityExplorer:
     def updateVisuals(self, user_input1, user_input2, tier):
 
         ium_field = IUMField(user_input1, user_input2, tier)
-        print 'col_name', ium_field.ium_column
+        #print 'col_name', ium_field.ium_column
 
         layer = None
         if tier == 1:
@@ -284,9 +284,9 @@ class CityExplorer:
             query = land_use_queries[user_input1]
             land_use_layer.setSubsetString(query)
             land_use_layer.triggerRepaint()
-            print 'land use query', query
+            #print 'land use query', query
         except KeyError:
-            print 'land use 2', user_input1
+            #print 'land use 2', user_input1
             land_use_layer.setSubsetString("")
 
         # update legend
@@ -349,7 +349,7 @@ class CityExplorer:
         return
 
     def refreshChart(self):
-        print 'refresh'
+        #print 'refresh'
         self.dockwidget.setSelected()
         self.updateChart()
         return

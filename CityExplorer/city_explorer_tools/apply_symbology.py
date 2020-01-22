@@ -29,7 +29,7 @@ def applySymbologyFixedDivisions(layer, field):
     ranges = field.get_values_ranges()
     labels = field.get_style_labels()
     column_name = field.ium_column
-    print colors, ranges, labels
+    #print colors, ranges, labels
 
     rangeList = []
     for i, range  in enumerate(ranges):

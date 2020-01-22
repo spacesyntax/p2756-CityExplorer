@@ -20,7 +20,7 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
     column_name = field.ium_column
     x_axis = field.get_x_axis()
 
-    print 'hist_info', colors, ranges, labels, column_name, use_selection
+    #print 'hist_info', colors, ranges, labels, column_name, use_selection
 
     if use_selection is True:
         values = [f[column_name] for f in layer.selectedFeatures()]
@@ -43,7 +43,7 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
         #TODO specify corect for buildings
         data_dict = {f['ranges']: float(f[column_name]) for f in layer.getFeatures()}
 
-    print 'data', data_dict
+    #print 'data', data_dict
 
     fig, ax = plt.subplots()
     ind = np.arange(len(ranges))

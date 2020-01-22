@@ -150,7 +150,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         user_input = self.get_district_index()
 
         if user_input:
-            print 'bef_emit_cps', (user_input, '', 1)
+            #print 'bef_emit_cps', (user_input, '', 1)
             self.selectionChanged.emit(user_input, '', 1)
         return
 
@@ -184,7 +184,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         user_input = self.get_building_index(), self.get_mode_time()
         if user_input != (None, None):
-            print 'bef_emit_kpi', (user_input[0], user_input[1], 2)
+            #print 'bef_emit_kpi', (user_input[0], user_input[1], 2)
             self.selectionChanged.emit(user_input[0], user_input[1], 2)
 
         return
@@ -193,23 +193,23 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         user_input = self.get_building2_index(), self.get_mode_time()
         if user_input != (None, None):
             if user_input[0] != 'all':
-                print 'bef_emit_kpi2', (user_input[0], user_input[1], 2)
+                #print 'bef_emit_kpi2', (user_input[0], user_input[1], 2)
                 self.selectionChanged.emit(user_input[0], user_input[1], 2)
             else:
-                print 'bef_emit_kpi2', (self.get_building_index(), user_input[1], 2)
+                #print 'bef_emit_kpi2', (self.get_building_index(), user_input[1], 2)
                 self.selectionChanged.emit(self.get_building_index(), user_input[1], 2)
 
     def updatestrinput(self):
         user_input = self.get_street_index(), ''
         if user_input != (None, None):
-            print 'bef_emit_str' , (user_input[0], user_input[1], 3)
+            #print 'bef_emit_str' , (user_input[0], user_input[1], 3)
             self.selectionChanged.emit(user_input[0], user_input[1], 3)
         return
 
     def updatemodeinput(self):
         user_input = self.get_building_index(), self.get_mode_time()
         if user_input != (None, None):
-            print 'bef_emit_mode', (user_input[0], user_input[1], 2)
+            #print 'bef_emit_mode', (user_input[0], user_input[1], 2)
             self.selectionChanged.emit(user_input[0], user_input[1], 2)
         return
 
@@ -225,7 +225,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def disable_kpicombo(self):
         if self.buildCheckBox.isChecked():
-            print 'build'
+            #print 'build'
             self.kpicombo.setDisabled(False)
             if self.kpi2combo.count() == 0:
                 self.kpi2combo.setDisabled(True)
@@ -299,7 +299,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         return
 
     def updateLayers(self):
-        print 'layer added/ removed : update layers'
+        #print 'layer added/ removed : update layers'
         self.districts = getLayerByName(self.layers[0])
         self.buildings = getLayerByName(self.layers[1])
         self.streets = getLayerByName(self.layers[2])
