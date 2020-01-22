@@ -4,7 +4,7 @@ land_use_queries = {
 'nurseries':	"lu_subgroup	=	'edu_nursery'",
 'primary & secondary education':	"lu_subgroup 	=	'edu_secondary'",
 'higher education faculties':	"lu_subgroup 	=	'edu_higher'",
-'Access to parks':      "lu_group =	'act_park'",
+'Access to parks':      "lu_group =	'act_parks'",
 'Access to cultural facilities': "lu_group =	'social'",
 'Health index':                "lu_group IN 	('phys', 'hcare', 'pt_stop')",
 'Access to sport facilities': "lu_group =	'phys'",
