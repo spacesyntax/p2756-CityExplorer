@@ -38,9 +38,10 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
             layer = getLayerByName(layer_name + '_summary_stats_int')
         elif column_name == 'car_dependence':
             layer = getLayerByName(layer_name + '_summary_stats_cardep')
-        elif column_name in ['vibrancy', 'walkability', 'car_dependence', 'energy_consumption']:
+        elif column_name in ['vibrancy', 'walkability', 'energy_consumption']:
             layer = getLayerByName(layer_name + '_summary_stats_0_1')
         #TODO specify corect for buildings
+        print'DEBUG', layer.name(), column_name
         data_dict = {f['ranges']: float(f[column_name]) for f in layer.getFeatures()}
 
     #print 'data', data_dict
