@@ -71,7 +71,7 @@ colour_scales = {
 
             'sport facilities': ["#fefeda","#fff063","#e6ff00","#8bfc00"],
             'cultural facilities': ["#edf8fb","#a6bbda","#896bb2","#810f7c"],
-            'public transport': ["#08306b","#3e8ec4","#b0d2e8","#f7fbff"],
+            'public transport': ["#f7fbff", "#b0d2e8", "#3e8ec4", "#08306b"],
 
 'parks': ["#f7fcf5","#b2e0ab","#3da75a","#00441b"],
 'Vibrancy' : ["#ffffff", "#efcccc", "#e09999", "#d16666","#c23333","#b30000"],
@@ -233,7 +233,11 @@ class IUMField(QObject):
                 else:
                     return # TODO MS_SCALE
             else:
-                return default_ranges
+                if self.ium_column == 'car_dependence':
+                    print 'DEBUG', cardep_ranges
+                    return cardep_ranges
+                else:
+                    return default_ranges
 
     def get_style_labels(self):
         if self.ium_column[0:12] == 'sum_count_id':
