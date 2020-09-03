@@ -217,7 +217,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         if self.cityCheckBox.isChecked():
             self.cpscombo.setDisabled(False)
             self.legend.setLayerVisible(self.districts, True)
-            self.selectionChanged.emit(self.get_district_index(), '', 2)
+            #self.selectionChanged.emit(self.get_district_index(), '', 2)
         else:
             self.cpscombo.setDisabled(True)
             self.legend.setLayerVisible(self.districts, False)
@@ -231,7 +231,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 self.kpi2combo.setDisabled(True)
             else:
                 self.kpi2combo.setDisabled(False)
-                self.selectionChanged.emit(self.get_building_index(), self.get_mode_time(), 2)
+                #self.selectionChanged.emit(self.get_building_index(), self.get_mode_time(), 2)
             self.modecombo.setDisabled(False)
             self.legend.setLayerVisible(self.buildings, True)
         else:
@@ -245,7 +245,7 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         if self.strCheckBox.isChecked():
             self.strcombo.setDisabled(False)
             self.legend.setLayerVisible(self.streets, True)
-            self.selectionChanged.emit(self.get_street_index(), '', 2)
+            #self.selectionChanged.emit(self.get_street_index(), '', 2)
         else:
             self.strcombo.setDisabled(True)
             self.legend.setLayerVisible(self.streets, False)
@@ -395,5 +395,3 @@ class CityExplorerDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
-
-

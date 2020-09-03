@@ -9,8 +9,8 @@ land_use_queries = {
 'Health index':                "lu_group IN 	('phys', 'hcare', 'pt_stop')",
 'Access to sport facilities': "lu_group =	'phys'",
 'Access to healthcare':  "lu_group =	'hcare'",
-'primary healthcare facilities': "lu_group =	'hcare_primary'",
-'secondary healthcare facilities': "lu_group =	'hcare_secondary'",
+'primary healthcare facilities': "lu_subgroup =	'hcare_primary'",
+'secondary healthcare facilities': "lu_subgroup =	'hcare_secondary'",
 'Access to public transport': "lu_group =	'pt_stop'",
 'Car dependence': "lu_group IN 	('agri', 'edu', 'hcare', 'indu' , 'office' , 'phys', 'public' , 'retail' , 'tour' , 'comm')",
 'Walkability': "lu_group IN 	('comm', 'edu' , 'hcare', 'office' , 'phys' , 'resi', 'retail' , 'social' ) "
