@@ -1,5 +1,5 @@
 land_use_queries = {
-'Liveability index' :           "lu_group IN ('edu', 'act_park', 'act_park') ",
+'Liveability index' :           "lu_group IN ('edu', 'act_parks') ",
 'Access to education':    "lu_group = 'edu'",
 'nurseries':	"lu_subgroup	=	'edu_nursery'",
 'primary & secondary education':	"lu_subgroup 	=	'edu_secondary'",
