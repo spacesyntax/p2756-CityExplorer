@@ -234,7 +234,7 @@ class IUMField(QObject):
                     return # TODO MS_SCALE
             else:
                 if self.ium_column == 'car_dependence':
-                    print 'DEBUG', cardep_ranges
+                    #print 'DEBUG', cardep_ranges
                     return cardep_ranges
                 else:
                     return default_ranges
