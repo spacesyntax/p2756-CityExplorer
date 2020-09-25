@@ -95,7 +95,7 @@ def drawHistogram(iface, layer, field, use_selection=False): #TODO districts
         # TODO % or actual value?
         i.set_height(float(data_dict[k]))
 
-    output_path = os.path.dirname(__file__) + '/foo.png'
+    output_path = os.path.dirname(__file__) + '/foo.jpeg'
     plt.savefig(output_path)
 
     return output_path, data_dict
