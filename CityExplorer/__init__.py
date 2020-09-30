@@ -6,7 +6,7 @@
  QGIS plugin to visualise IUM Baseline measures 
                              -------------------
         begin                : 2019-11-14
-        copyright            : (C) 2019 by Ioanna Kolovou
+        copyright            : (C) 2020 by Space Syntax Limited
         email                : i.kolovou@spacesyntax.com
         git sha              : $Format:%H$
  ***************************************************************************/

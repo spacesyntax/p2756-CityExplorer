@@ -7,7 +7,7 @@
                              -------------------
         begin                : 2019-11-14
         git sha              : $Format:%H$
-        copyright            : (C) 2019 by Ioanna Kolovou
+        copyright            : (C) 2020 by Space Syntax Limited
         email                : i.kolovou@spacesyntax.com
  ***************************************************************************/
 
